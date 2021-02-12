@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <style>
  
+
+ 
 body{
     background: #15192C;
     color: white;
@@ -18,97 +20,126 @@ body{
 }
 #first{
   padding-left:50px;
- 
 }
-#DoctorId{
+#PatientId{
   border-radius: 10px;
-}
-#AccessToken{
-  border-radius:10px;
+  width:350px;
 }
 
+#AccessToken{
+  border-radius:10px;
+  width:350px;
+}
 
 .container-fluid{
     max-height:1000px;
     height:582px;
 }
 
-
-
-
-@media only screen and (max-width:992px)and (min-width:100px){
+@media only screen and (max-width:991px)and (min-width:100px){
   .container-fluid{
-    height:800px;
+    height:900px;
   }
 }
 
-@media only screen and (max-width:992px)and (min-width:100px){
+@media only screen and (max-width:991px)and (min-width:100px){
   #first{
-    padding:50px;
+    /* padding:50px; */
+    padding:10px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
   }
-  .container-fluid{
-    height:auto;
-  }
-  .h-442{
-    height:440px;
-  }
-
-}
-
-
-@media only screen and (max-width:550px)and (min-width:100px){
-  #first{
-    padding:30px;
-  }
-
-}
-
-/* @media only screen and (max-width:632px)and (min-width:100px){
   #first img{
-    height:300px;
-  }
-  #first{
-    padding:30px;
-  }
-  .container-fluid{
-    height:720px;
+      height:400px;
   }
 
-} */
-
-
-
-@media only screen and (max-width:992px)and (min-width:783px){
-  #first{
-    /* width:663px; */
-  }
-  .responsive{
-      width:663px;
-      height:483px;
-  }
 }
 
 
+@media only screen and (max-width:700px)and (min-width:100px){
+    #first img{
+        height:300px;
+        width:300px;
+    }
+    .container-fluid{
+        height: 800px;
+    }
+    #PatientId{
+      width:300px;
+    }
+    #AccessToken{
+      width:300px;
+    }
+
+}
+
+@media only screen and (max-width:500px)and (min-width:100px){
+  #PatientId{
+      width:250px;
+    }
+    #AccessToken{
+      width:250px;
+    }
+}
+
+@media only screen and (max-width:400px)and (min-width:100px){
+  #PatientId{
+      width:220px;
+    }
+    #AccessToken{
+      width:220px;
+    }
+}
+
+@media only screen and (max-width:340px)and (min-width:100px){
+  #PatientId{
+      width:200px;
+    }
+    #AccessToken{
+      width:200px;
+    }
+    #first img{
+        height:250px;
+        width:250px;
+    }
+}
+
+@media only screen and (max-width:265px)and (min-width:100px){
+  #PatientId{
+      width:100%;
+
+    }
+    #AccessToken{
+      width:100%;
+    }
+    #first img{
+        height:auto;
+        width:100%;
+    }
+    .container-fluid{
+      height:auto;
+    }
+}
 
 
 
 
     </style>
-    <title>Doctor Login Page</title>
+    <title>Patient Login Page</title>
   </head>
   <body>
-      <div class="container-fluid my-4 d-flex align-items-center justify-content-center">
-        <div class="row align-items-center">
-            <div class="col-lg-6 col-md-12 d-flex justify-content-center" id="first">
-                 <img src="../Images/undraw_doctor_kw5l.png" alt=".." width="100%" class=" d-block responsive" height="auto">       
-            
+      <div class="container-fluid my-4 d-flex justify-content-center align-items-center">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 order-2" id="first">
+                   <img src="../Images/patient.png" alt=".." height="500" width="400">
             </div>
-            <div class="col-lg-6 col-md-12 d-flex text-center justify-content-center align-items-center my-sm-4" id="second">
-                    <form class="col-6">
-                      <img class="mb-4" src="../Images/stethoscope.png" alt="" width="72" height="57">
+            <div class="col-lg-6 col-md-12 col-sm-12 d-flex text-center justify-content-center align-items-center my-sm-4 order-1" id="second">
+                    <form>
+                      <img class="mb-4" src="../Images/heart.png" alt="" width="57" height="57">
                       <!-- <h1 class="h3 mb-3 fw-normal" id="sign">Please sign in</h1> -->
-                      <label for="DoctorId" class="visually-hidden">Doctor ID</label>
-                      <input type="text" id="DoctorId" class="form-control" placeholder="Doctor Id" required="" autofocus="">
+                      <label for="PatientId" class="visually-hidden">Patient  ID</label>
+                      <input type="text" id="PatientId" class="form-control" placeholder="Patient Id" required="" autofocus="">
                       <label for="AccessToken" class="visually-hidden">Access Token</label>
                       <input type="text" id="AccessToken" class="form-control my-4" placeholder="Access Token" required="">
                       <div class="checkbox mb-3">
