@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <style>
+ 
+
+ 
+body{
+    background: #15192C;
+    color: white;
+}
+#sign{
+    color:white;
+}
+#first{
+  padding-left:50px;
+}
+#PatientId{
+  border-radius: 10px;
+  width:350px;
+}
+
+#AccessToken{
+  border-radius:10px;
+  width:350px;
+}
+
+.container-fluid{
+    max-height:1000px;
+    height:582px;
+}
+
+@media only screen and (max-width:991px)and (min-width:100px){
+  .container-fluid{
+    height:900px;
+  }
+}
+
+@media only screen and (max-width:991px)and (min-width:100px){
+  #first{
+    /* padding:50px; */
+    padding:10px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #first img{
+      height:400px;
+  }
+
+}
+
+
+@media only screen and (max-width:700px)and (min-width:100px){
+    #first img{
+        height:300px;
+        width:300px;
+    }
+    .container-fluid{
+        height: 800px;
+    }
+    #PatientId{
+      width:300px;
+    }
+    #AccessToken{
+      width:300px;
+    }
+
+}
+
+@media only screen and (max-width:500px)and (min-width:100px){
+  #PatientId{
+      width:250px;
+    }
+    #AccessToken{
+      width:250px;
+    }
+}
+
+@media only screen and (max-width:400px)and (min-width:100px){
+  #PatientId{
+      width:220px;
+    }
+    #AccessToken{
+      width:220px;
+    }
+}
+
+@media only screen and (max-width:340px)and (min-width:100px){
+  #PatientId{
+      width:200px;
+    }
+    #AccessToken{
+      width:200px;
+    }
+    #first img{
+        height:250px;
+        width:250px;
+    }
+}
+
+@media only screen and (max-width:265px)and (min-width:100px){
+  #PatientId{
+      width:100%;
+
+    }
+    #AccessToken{
+      width:100%;
+    }
+    #first img{
+        height:auto;
+        width:100%;
+    }
+    .container-fluid{
+      height:auto;
+    }
+}
+
+
+
+
+    </style>
+    <title>Patient Login Page</title>
+  </head>
+  <body>
+      <div class="container-fluid my-4 d-flex justify-content-center align-items-center">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 order-2" id="first">
+                   <img src="../Images/patient.png" alt=".." height="500" width="400">
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 d-flex text-center justify-content-center align-items-center my-sm-4 order-1" id="second">
+                    <form>
+                      <img class="mb-4" src="../Images/heart.png" alt="" width="57" height="57">
+                      <!-- <h1 class="h3 mb-3 fw-normal" id="sign">Please sign in</h1> -->
+                      <label for="PatientId" class="visually-hidden">Patient  ID</label>
+                      <input type="text" id="PatientId" class="form-control" placeholder="Patient Id" required="" autofocus="">
+                      <label for="AccessToken" class="visually-hidden">Access Token</label>
+                      <input type="text" id="AccessToken" class="form-control my-4" placeholder="Access Token" required="">
+                      <div class="checkbox mb-3">
+                        <label>
+                          <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                      </div>
+                      <button class="w-100 btn btn-lg btn-primary" type="submit">login</button>
+                      <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
+                    </form>            
+                </div>
+        </div>
+
+      </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
