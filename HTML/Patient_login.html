@@ -65,7 +65,65 @@ body{
     .container-fluid{
         height: 800px;
     }
+    #PatientId{
+      width:300px;
+    }
+    #AccessToken{
+      width:300px;
+    }
+
 }
+
+@media only screen and (max-width:500px)and (min-width:100px){
+  #PatientId{
+      width:250px;
+    }
+    #AccessToken{
+      width:250px;
+    }
+}
+
+@media only screen and (max-width:400px)and (min-width:100px){
+  #PatientId{
+      width:220px;
+    }
+    #AccessToken{
+      width:220px;
+    }
+}
+
+@media only screen and (max-width:340px)and (min-width:100px){
+  #PatientId{
+      width:200px;
+    }
+    #AccessToken{
+      width:200px;
+    }
+    #first img{
+        height:250px;
+        width:250px;
+    }
+}
+
+@media only screen and (max-width:265px)and (min-width:100px){
+  #PatientId{
+      width:100%;
+
+    }
+    #AccessToken{
+      width:100%;
+    }
+    #first img{
+        height:auto;
+        width:100%;
+    }
+    .container-fluid{
+      height:auto;
+    }
+}
+
+
+
 
     </style>
     <title>Patient Login Page</title>
@@ -76,9 +134,9 @@ body{
             <div class="col-lg-6 col-md-12 order-2" id="first">
                    <img src="../Images/patient.png" alt=".." height="500" width="400">
             </div>
-            <div class="col-lg-6 col-md-12 d-flex text-center justify-content-center align-items-center my-sm-4 order-1" id="second">
-                    <form >
-                      <img class="mb-4" src="../Images/stethoscope.png" alt="" width="72" height="57">
+            <div class="col-lg-6 col-md-12 col-sm-12 d-flex text-center justify-content-center align-items-center my-sm-4 order-1" id="second">
+                    <form>
+                      <img class="mb-4" src="../Images/heart.png" alt="" width="57" height="57">
                       <!-- <h1 class="h3 mb-3 fw-normal" id="sign">Please sign in</h1> -->
                       <label for="PatientId" class="visually-hidden">Patient  ID</label>
                       <input type="text" id="PatientId" class="form-control" placeholder="Patient Id" required="" autofocus="">
