@@ -1,0 +1,40 @@
+.container-fluid{
+    padding:0px;
+}
+
+.sidebar{
+    /* background-color:rgba(255, 255, 255, 0.54); */
+    margin:0px;
+    padding:0px;
+    width:150px;
+}
+
+@media only screen and (max-width:992px)and (min-width:0px){
+    .sidebar{
+        width:100px;
+    }
+    .sidebar img{
+        width:70px;
+        height:70px;
+    }
+}
+
+@media only screen and (max-width:768px)and (min-width:0px){
+    .sidebar{
+        width:120px;
+    }
+    .sidebar img{
+        width:60px;
+        height:60px;
+    }
+}
+
+@media only screen and (max-width:576px)and (min-width:0px){
+    .sidebar{
+        width:100px;
+    }
+    .sidebar img{
+        width:50px;
+        height:50px;
+    }
+}
