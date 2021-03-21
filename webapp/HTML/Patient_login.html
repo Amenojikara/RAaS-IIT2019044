@@ -76,7 +76,7 @@ body{
 
 @media only screen and (max-width:500px)and (min-width:100px){
   #PatientId{
-      width:250px;
+      /* width:250px; */
     }
     #AccessToken{
       width:250px;
@@ -139,7 +139,7 @@ body{
                       <img class="mb-4" src="../Images/heart.png" alt="" width="57" height="57">
                       <!-- <h1 class="h3 mb-3 fw-normal" id="sign">Please sign in</h1> -->
                       <label for="PatientId" class="visually-hidden">Patient  ID</label>
-                      <input type="text" id="PatientId" class="form-control" placeholder="Patient Id" required="" autofocus="">
+                      <input type="text" id="PatientId" class="form-control " placeholder="Patient Id" required="" autofocus="">
                       <label for="AccessToken" class="visually-hidden">Access Token</label>
                       <input type="text" id="AccessToken" class="form-control my-4" placeholder="Access Token" required="">
                       <div class="checkbox mb-3">
@@ -147,7 +147,10 @@ body{
                           <input type="checkbox" value="remember-me"> Remember me
                         </label>
                       </div>
-                      <button class="w-100 btn btn-lg btn-primary" type="submit">login</button>
+                      <div class="d-flex">
+                      <button class="w-50 btn btn-lg btn-primary m-3" type="submit">sign up</button>
+                      <button class="w-50 btn btn-lg btn-primary m-3" type="submit">login</button>
+                    </div>
                       <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
                     </form>            
                 </div>
