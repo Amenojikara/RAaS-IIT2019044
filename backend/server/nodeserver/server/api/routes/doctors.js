@@ -69,7 +69,7 @@ router.get('/profile/:id', (req, res, next) => {
         .catch(err => res.status(500).json({error: err}));
 })
 
-/* 
+/*
 
 {
     "did": "DID02",
@@ -82,7 +82,7 @@ router.get('/profile/:id', (req, res, next) => {
                             "y": 2,
                             "z": 3,
                             "prediction": 4
-                          } 
+                          }
             }
 
 }
@@ -97,7 +97,7 @@ router.get('/dashboard/:id', async (req,res, next) => {
     }
     let patients = doc.patients;
     let patient_details = []
-    
+
     for(var i=0 ; i<patients.length ; i++){
         requestOptions = {
             method: 'GET',
@@ -136,7 +136,7 @@ router.patch('/dashboard/:id', async (req, res, next) => {
                     .catch(err => {return res.status(500).json({error: err})});
         }
     })
-    
+
     // Updating Patient Schema
 
     await Patient.find({'tests._id': test.id}, (err, found) => {
@@ -153,11 +153,11 @@ router.patch('/dashboard/:id', async (req, res, next) => {
                     .exec()
                     .then()
                     .catch(err => {return res.status(500).json({eoor: err})});
-            
+
         }
 
     })
-    
+
 
     // Updating Disease Database
     if(test.title === "diabetes"){
@@ -177,14 +177,10 @@ router.patch('/dashboard/:id', async (req, res, next) => {
         message: "Data stored successfully!"
     })
 
-    
+
 
 });
 
-get(""){
-    api call(
-        dbd
-    )
-}
+
 
 module.exports = router;

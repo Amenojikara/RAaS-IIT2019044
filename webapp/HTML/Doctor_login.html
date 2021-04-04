@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <style>
- 
+
 body{
     background: #15192C;
     color: white;
@@ -18,7 +18,7 @@ body{
 }
 #first{
   padding-left:50px;
- 
+
 }
 #DoctorId{
   border-radius: 10px;
@@ -100,8 +100,8 @@ body{
       <div class="container-fluid my-4 d-flex align-items-center justify-content-center">
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-12 d-flex justify-content-center" id="first">
-                 <img src="../Images/undraw_doctor_kw5l.png" alt=".." width="100%" class=" d-block responsive" height="auto">       
-            
+                 <img src="../Images/undraw_doctor_kw5l.png" alt=".." width="100%" class=" d-block responsive" height="auto">
+
             </div>
             <div class="col-lg-6 col-md-12 d-flex text-center justify-content-center align-items-center my-sm-4" id="second">
                     <form class="col-6">
@@ -116,13 +116,25 @@ body{
                           <input type="checkbox" value="remember-me"> Remember me
                         </label>
                       </div>
-                      <button class="w-100 btn btn-lg btn-primary" type="submit">login</button>
+                    <!-- <a href="Doctor_dashboard.html">  -->
+                       <button id="doctor_log" class="w-100 btn btn-lg btn-primary" type="button">login</button>
+                     <!-- </a> -->
                       <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
-                    </form>            
+                    </form>
                 </div>
         </div>
 
       </div>
+
+      <script>
+      const id= document.getElementById('doctor_log');
+      id.addEventListener('click',function(){
+        var id1= document.getElementById('DoctorId').value;
+        window.location='/doctor/'+id1;
+      })
+
+
+      </script>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
