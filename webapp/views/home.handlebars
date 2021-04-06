@@ -4,10 +4,10 @@
            min-vh-100">
            <div class="nav justify-content-center">
             <li class="nav-item d-block w-100 mt-3">
-                <a href="./Doctor_dashboard_profile.html" class="nav-link d-flex justify-content-center"><img src="../Images/user.png" alt="" height="50px" width="50px"></a>
+                <a href="./Doctor_dashboard_profile.html" class="nav-link d-flex justify-content-center"><img src="../../Images/user.png" alt="" height="50px" width="50px"></a>
             </li>
             <li class="nav-item d-block w-100">
-                <a href="#" class="nav-link d-flex justify-content-center" ><img src="../Images/test-tube.png" alt="" height="50px" width="50px" class=""></a>
+                <a href="#" class="nav-link d-flex justify-content-center" ><img src="../../Images/test-tube.png" alt="" height="50px" width="50px" class=""></a>
             </li>
         </div>
 
@@ -18,35 +18,35 @@
 
 
     {{#each patient_details}}
-              <div class="col-12 col-md-5 offset-md-1 justify-content-center ml-5 ">
-                <div class="card mt-3">
-                        <h5 class="card-title">Patient_id:{{this._id}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Name: {{this.name}}</h6>
-                        <h6 class="card-title text-danger">email : {{this.email}}</h6>
-                        <a class="card-link text-center" data-bs-toggle="collapse" data-bs-target="#mycollapse1">Test Details</a>
-                        <table class="table table-striped collapse fade" id="mycollapse1" >
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            {{#each this.tests}}
-                              <tr>
-                                <th scope="row">{{this.title}}</th>
-                                <td>{{this.id}}</td>
-                                <td>{{this.supervisor_doctor}}</td>
-                                <td>{{this.details.pregnancies}}</td>
-                                <td><button>Gaand</button></td>
-                              </tr>
-                            {{/each}}
-                            </tbody>
-                          </table>
-                      </div>
-
+          <div class="row w-100 d-flex justify-content-center mt-3 mt-md-5 mt-sm-3 align-items-start">
+              <div class="col-md-8 col-sm-10 justify-content-center mb-4">
+                <div class="card p-3">
+                    <div>
+                      <h5 class="card-title">Patient_id:{{this._id}}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">Name: {{this.name}}</h6>
+                      <h6 class="card-title text-danger">Email: {{this.email}}</h6>
+                      <a class="card-link text-center" data-bs-toggle="collapse" data-bs-target="#{{this._id}}">Test Details</a>
+                    </div>
+                    <table class="table table-striped collapse fade" id="{{this._id}}">
+                        <thead>
+                          <tr>
+                            <th scope="col">Disease</th>
+                            <th scope="col">Disease ID</th>
+                            <th scope="col">Details</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {{#each this.tests}}
+                          <tr>
+                            <th scope="row">{{this.title}}</th>
+                            <td>{{this.id}}</td>
+                            <td><button>Details</button></td>
+                          </tr>
+                        {{/each}}
+                        </tbody>
+                      </table>
+                  </div>
+                </div>
               </div>
               
           
@@ -54,28 +54,12 @@
                   </div>
 
               <span class="d-flex justify-content-end" id="add_new_patient" data-toggle="modal" data-target="#exampleModalCenter">
-                <a href=""  onclick="addNewPatient()" data-bs-toggle="modal" data-bs-target="#addTest"><img  src="../Images/plus.png" alt="" class="" height="50px" width="50px"></a>
-
-            </span>
+                <a href=""  onclick="addNewPatient()" data-bs-toggle="modal" data-bs-target="#addTest"><img  src="../../Images/plus.png" alt="" class="" height="50px" width="50px"></a>
+              </span>
 
           </div>
       </div>
 
-      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-        Launch demo modal
-      </button> -->
-
-      <!-- Modal -->
-
-
-
-
-
-
-  <!-- Button trigger modal -->
-  <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-  </button> -->
 
   <!-- Modal -->
   <div class="modal fade" id="addTest" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -86,8 +70,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="add_Details">
-            <label>Name: </label>
+          <form class="add_Details" method="POST" action="/doctor/dashboard/">
+            <label>Patient id : </label>
             <input type="text" name="Patient_name">
             <br>
             <label>Token Number: </label>
@@ -104,18 +88,20 @@
             <!-- <div id="detailDisease" name="detailDisease">
 
             </div> -->
-          <ul id="detailDisease">
+            <ul id="detailDisease">
 
-          </ul>
-             <!-- <form id="detailDisease">
+            </ul>
+              <!-- <form id="detailDisease">
 
-             </form> -->
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
+              </form> -->
+            
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+      </form>
       </div>
     </div>
   </div>
@@ -128,6 +114,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 <script>
+
 function addNewPatient(){
   var element=document.querySelectorAll(".row .col-12");
   if(element.length%2==0){
@@ -143,23 +130,22 @@ function addNewPatient(){
     s2.innerHTML="";
     var selected_option= this.value;
     if(selected_option =="Cancer"){
+      var fields=["Radius_mean","Perimeter_mean","Area_mean","Concavity_mean","Concave_points_mean","Radius_se","Area_se","Radius_worst","Texture_worst","Perimeter_worst","Area_worst","Compactness_worst","Concavity_worst","Concave_points_worst"];
 
-
-
-  //
-  var fields=["Radius_mean","Perimeter_mean","Area_mean","Concavity_mean","Concave_points_mean","Radius_se","Area_se","Radius_worst","Texture_worst","Perimeter_worst","Area_worst","Compactness_worst","Concavity_worst","Concave_points_worst"];
-  var i=1;
-  for(i=0;i<fields.length;i++){
-    var list = document.createElement("LI");
-  var lab= document.createElement("LABEL");
-  var textnode = document.createTextNode(fields[i]+":- ");
-   lab.appendChild(textnode);
-  var node=document.createElement("INPUT");
-  node.type="number";
-  list.appendChild(lab);
-  document.getElementById("detailDisease").appendChild(list);
-  list.appendChild(node);
-  document.getElementById("detailDisease").appendChild(list);
+      var name = ["Radius_mean","Perimeter_mean","Area_mean","Concavity_mean","Concave_points_mean","Radius_se","Area_se","Radius_worst","Texture_worst","Perimeter_worst","Area_worst","Compactness_worst","Concavity_worst","Concave_points_worst"];
+      
+      for(var i=0;i<fields.length;i++){
+        var list = document.createElement("LI");
+        var lab = document.createElement("LABEL");
+        var textnode = document.createTextNode(fields[i]+":  ");
+        lab.appendChild(textnode);
+        var node=document.createElement("INPUT");
+        node.type="number";
+        node.name=name[i];
+        list.appendChild(lab);
+        document.getElementById("detailDisease").appendChild(list);
+        list.appendChild(node);
+        document.getElementById("detailDisease").appendChild(list);
   }
     }
     else if(selected_option =="Diabetes"){
@@ -167,15 +153,15 @@ function addNewPatient(){
       var i=1;
       for(i=0;i<fields.length;i++){
         var list = document.createElement("LI");
-      var lab= document.createElement("LABEL");
-      var textnode = document.createTextNode(fields[i]+":- ");
-       lab.appendChild(textnode);
-      var node=document.createElement("INPUT");
-      node.type="number";
-      list.appendChild(lab);
-      document.getElementById("detailDisease").appendChild(list);
-      list.appendChild(node);
-      document.getElementById("detailDisease").appendChild(list);
+        var lab= document.createElement("LABEL");
+        var textnode = document.createTextNode(fields[i]+":- ");
+        lab.appendChild(textnode);
+        var node=document.createElement("INPUT");
+        node.type="number";
+        list.appendChild(lab);
+        document.getElementById("detailDisease").appendChild(list);
+        list.appendChild(node);
+        document.getElementById("detailDisease").appendChild(list);
       }
     }
 
@@ -185,28 +171,28 @@ function addNewPatient(){
       var i=1;
       for(i=0;i<fields.length;i++){
         var list = document.createElement("LI");
-      var lab= document.createElement("LABEL");
-      var textnode = document.createTextNode(fields[i]+":- ");
-       lab.appendChild(textnode);
-      var node=document.createElement("INPUT");
-      node.type="number";
-      list.appendChild(lab);
-      document.getElementById("detailDisease").appendChild(list);
-      list.appendChild(node);
-      document.getElementById("detailDisease").appendChild(list);
+        var lab= document.createElement("LABEL");
+        var textnode = document.createTextNode(fields[i]+":- ");
+        lab.appendChild(textnode);
+        var node=document.createElement("INPUT");
+        node.type="number";
+        list.appendChild(lab);
+        document.getElementById("detailDisease").appendChild(list);
+        list.appendChild(node);
+        document.getElementById("detailDisease").appendChild(list);
       }
     }
     else if(selected_option =="Throat Tumor"){
       var list = document.createElement("LI");
-    var lab= document.createElement("LABEL");
-    var textnode = document.createTextNode("Upload the image:- ");
-     lab.appendChild(textnode);
-    var node=document.createElement("INPUT");
-    node.type="file";
-    list.appendChild(lab);
-    document.getElementById("detailDisease").appendChild(list);
-    list.appendChild(node);
-    document.getElementById("detailDisease").appendChild(list);
+      var lab= document.createElement("LABEL");
+      var textnode = document.createTextNode("Upload the image:- ");
+      lab.appendChild(textnode);
+      var node=document.createElement("INPUT");
+      node.type="file";
+      list.appendChild(lab);
+      document.getElementById("detailDisease").appendChild(list);
+      list.appendChild(node);
+      document.getElementById("detailDisease").appendChild(list);
     }
   });
 

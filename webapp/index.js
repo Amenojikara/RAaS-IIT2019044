@@ -1,64 +1,77 @@
-const express=require("express");
+const express = require("express");
 const bodyParser= require("body-parser");
 const superagent = require('superagent');
 const https= require("https");
 const app= express();
-app.use(bodyParser.urlencoded({extended: true}));
-
+const URLS = require('./baseUrls');
+const fetch = require("node-fetch");
 var exphbs  = require('express-handlebars');
 
+app.use(bodyParser.urlencoded("extended: true"))
+app.use(express.static("public"));
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-app.get('/fuck', function (req, res) {
-    res.render('home');
+
+app.get("/", function(req,res){
+  res.sendFile(__dirname + "/HTML/startPage.html");
 });
 
 
-
-app.get("/",function(req,res){
-  res.sendFile(__dirname+"/HTML/startPage.html");
-});
-app.get("/Patient_login.html",function(req,res){
+app.get("/patient",function(req,res){
   res.sendFile(__dirname+"/HTML/Patient_login.html");
 });
-app.get("/Patient_Register.html",function(req,res){
+
+app.get("/patient/register",function(req,res){
   res.sendFile(__dirname+"/HTML/Patient_Register.html");
 });
-app.get("/Doctor_login.html",function(req,res){
-  res.sendFile(__dirname+"/HTML/Doctor_login.html");
-});
-app.get("/Doctor_dashboard.html",function(req,res){
-  res.sendFile(__dirname+"/HTML/Doctor_dashboard.html");
-});
-app.get("/Patient_dashboard.html",function(req,res){
+
+app.get("/patient/dashboard",function(req,res){
   res.sendFile(__dirname+"/HTML/Patient_dashboard.html");
 });
 
-app.get("/doctor/:id",function(req,res){
-  //res.send(req.params.id);
+app.get("/doctor",function(req,res){
+  res.sendFile(__dirname+"/HTML/Doctor_login.html");
+});
 
+app.post("/doctor", async (req, res) =>{
+  console.log(req.body);
+  const body = {
+    _id: `${req.body.id}`,
+    token: `${req.body.token}`
+  }
+  const requestOption = {
+    method: "POST",
+    headers: {"Content-type": "application/json"},
+    body: JSON.stringify(body)
+  }
 
-// callback
-superagent
-  .get('https://cb90c9404cfd.ngrok.io/doctor/dashboard/'+req.params.id)
-  // .get('http://localhost:4200/Doctor_dashboard.html')
-  // .send({ name: 'Manny', species: 'cat' }) // sends a JSON post body
-  // .set('X-API-Key', 'foobar')
-  // .set('accept', 'json')
-  .end((err, response) => {
-    // Calling the end function will send the request
-    // res.send(response);
-    console.log(JSON.parse(response.text))
-    res.render('home', JSON.parse(response.text))
-  });
+  console.log(requestOption)
+
+  const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/login/`, requestOption)
+  const data = await rawResponse.json();
+  console.log(data);
+  if(data.message == "Auth Successful"){
+    res.redirect(`/doctor/dashboard/${req.body.id}`)
+  } else {
+    // res.redirect(`/doctor/dashboard/${req.body.id}`)
+    res.redirect("/");
+  }
+
+});
+
+app.get("/doctor/dashboard/:id", async(req,res) => {
+
+    const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/dashboard/${req.params.id}/`);
+    const data = await rawResponse.json();
+    console.log(data);
+    res.render('home', data);
 })
 
-app.use(express.static("public"));
-
-
-
+app.post("/doctor/dashboard/", async(req,res) => {
+  console.log(req.body);
+})
 
 app.listen(4200,function(){
-  console.log("server is running at port 4200");
+  console.log("WebApp is running at port 4200");
 })
