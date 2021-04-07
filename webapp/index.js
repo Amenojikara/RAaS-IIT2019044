@@ -51,7 +51,8 @@ app.post("/doctor", async (req, res) =>{
   const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/login/`, requestOption)
   const data = await rawResponse.json();
   console.log(data);
-  if(data.message == "Auth Successful"){
+  if(data.message === 'Auth Successful'){
+    // res.redirect("/");
     res.redirect(`/doctor/dashboard/${req.body.id}`)
   } else {
     // res.redirect(`/doctor/dashboard/${req.body.id}`)

@@ -24,7 +24,6 @@ class DataGen(keras.utils.Sequence):
         
     def __load__(self, id_name):
         image_path = os.path.join(self.path, id_name, "images", id_name) + ".png"
-        print(image_path)
         image = cv2.imread(image_path, 1)
         image = cv2.resize(image, (self.image_size, self.image_size))
         

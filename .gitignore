@@ -3,6 +3,8 @@
 # dependencies
 node_modules/
 dataset/
+mri_images/
+throat_prediction/
 /.pnp
 .pnp.js
 
