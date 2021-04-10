@@ -48,8 +48,8 @@
                   </div>
                 </div>
               </div>
-              
-          
+
+
               {{/each}}
                   </div>
 
@@ -74,8 +74,8 @@
             <label>Patient id : </label>
             <input type="text" name="Patient_name">
             <br>
-            <label>Token Number: </label>
-            <input type="number" name="token_id">
+            <label>Disease Id: </label>
+            <input type="text" name="dis_id">
             <br>
 
             <label for="addDisease">Disease Type: </label>
@@ -94,7 +94,7 @@
               <!-- <form id="detailDisease">
 
               </form> -->
-            
+
           </div>
 
           <div class="modal-footer">
@@ -133,7 +133,7 @@ function addNewPatient(){
       var fields=["Radius_mean","Perimeter_mean","Area_mean","Concavity_mean","Concave_points_mean","Radius_se","Area_se","Radius_worst","Texture_worst","Perimeter_worst","Area_worst","Compactness_worst","Concavity_worst","Concave_points_worst"];
 
       var name = ["Radius_mean","Perimeter_mean","Area_mean","Concavity_mean","Concave_points_mean","Radius_se","Area_se","Radius_worst","Texture_worst","Perimeter_worst","Area_worst","Compactness_worst","Concavity_worst","Concave_points_worst"];
-      
+
       for(var i=0;i<fields.length;i++){
         var list = document.createElement("LI");
         var lab = document.createElement("LABEL");
@@ -141,6 +141,7 @@ function addNewPatient(){
         lab.appendChild(textnode);
         var node=document.createElement("INPUT");
         node.type="number";
+          node.step=".01";
         node.name=name[i];
         list.appendChild(lab);
         document.getElementById("detailDisease").appendChild(list);
@@ -150,6 +151,8 @@ function addNewPatient(){
     }
     else if(selected_option =="Diabetes"){
       var fields=["Pregnancies","Glucose","Blood Pressure","Skin Thickness","Insulin","BMI","Diabetes Pedigree Function","Age"];
+      var name=["Pregnancies","Glucose","Blood_Pressure","Skin_Thickness","Insulin","BMI","Diabetes_Pedigree_Function","Age"];
+
       var i=1;
       for(i=0;i<fields.length;i++){
         var list = document.createElement("LI");
@@ -158,6 +161,8 @@ function addNewPatient(){
         lab.appendChild(textnode);
         var node=document.createElement("INPUT");
         node.type="number";
+          node.step=".01";
+        node.name=name[i];
         list.appendChild(lab);
         document.getElementById("detailDisease").appendChild(list);
         list.appendChild(node);
@@ -167,7 +172,9 @@ function addNewPatient(){
 
 
     else if(selected_option =="Heart Disease"){
-      var fields=["Age","Sex","CP","Trestbps","Chol","FBS","RestECG","Thalach","Exang","Old peak","Slope","CA","Thal"];
+      var fields=["Age","Sex","CP","Trestbps","Chol","FBS","RestECG","Thalach","Exang","Old_peak","Slope","CA","Thal"];
+      var name=["Age","Sex","CP","Trestbps","Chol","FBS","RestECG","Thalach","Exang","Old_peak","Slope","CA","Thal"];
+
       var i=1;
       for(i=0;i<fields.length;i++){
         var list = document.createElement("LI");
@@ -176,6 +183,8 @@ function addNewPatient(){
         lab.appendChild(textnode);
         var node=document.createElement("INPUT");
         node.type="number";
+        node.step=".01";
+          node.name=name[i];
         list.appendChild(lab);
         document.getElementById("detailDisease").appendChild(list);
         list.appendChild(node);
@@ -189,6 +198,7 @@ function addNewPatient(){
       lab.appendChild(textnode);
       var node=document.createElement("INPUT");
       node.type="file";
+      node.name="throat_photo"
       list.appendChild(lab);
       document.getElementById("detailDisease").appendChild(list);
       list.appendChild(node);
