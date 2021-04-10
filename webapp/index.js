@@ -182,8 +182,14 @@ var obj={
 };
 }
 else{
+  var image=req.body.throat_photo;
+  // console.log(typeof(image));
+  var array = image.split(".");
+
+  var image_title= array[0];
   var obj={
-    image_name: req.body.throat_photo
+
+    title: image_title
   };
 }
 
