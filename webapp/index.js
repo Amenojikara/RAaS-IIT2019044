@@ -18,6 +18,7 @@ app.use(express.urlencoded());
 app.use(cors());
 app.use(cookieParser());
 
+
 app.get("/", function(req,res){
   res.sendFile(__dirname + "/HTML/startPage.html");
 });
@@ -67,7 +68,6 @@ app.post("/doctor", async (req, res) =>{
 });
 
 app.get("/doctor/dashboard/:id", async(req,res) => {
-
     const token = req.cookies.token || ''  ;
     const requestOption = {
       method: "GET",
@@ -105,96 +105,119 @@ app.get("/doctor/dashboard/:id", async(req,res) => {
 //
 // }
 
-app.post("/doctor/dashboard/", async(req,res) => {
-
+app.post("/doctor/dashboard/:id", async(req,res) => {
+  console.log("Khalnayak", req.params.id);
   if(req.body.addDisease=="Cancer"){
-  var obj={
-    "did": "DID02",
-    "pid": req.body.Patient_name,
-    "test": {
-                "title": "cancer",
-                "id": req.body.dis_id,
-                "details":{
-                            "Radius_mean" : req.body.Radius_mean,
-                            "Perimeter_mean": req.body.Perimeter_mean ,
-                            "Area_mean": req.body.Area_mean,
-                            "Concavity_mean": req.body.Concavity_mean,
-                            "Concave_points_mean": req.body.Concave_points_mean,
-                            "Radius_se": req.body.Radius_se,
-                            "Area_se": req.body.Area_se,
-                            "Radius_worst": req.body.Radius_worst,
-                            "Texture_worst": req.body.Texture_worst,
-                            "Perimeter_worst": req.body.Perimeter_worst,
-                            "Area_worst": req.body.Area_worst,
-                            "Compactness_worst": req.body.Compactness_worst,
-                            "Concavity_worst": req.body.Concavity_worst,
-                            "Concave_points_worst": req.body.Concave_points_worst
-                        }
-            }
+      var obj={
+        "did": req.params.id,
+        "pid": req.body.Patient_name,
+        "test": {
+                    "title": "cancer",
+                    "id": req.body.dis_id,
+                    "details":{
+                                "Radius_mean" : req.body.Radius_mean,
+                                "Perimeter_mean": req.body.Perimeter_mean ,
+                                "Area_mean": req.body.Area_mean,
+                                "Concavity_mean": req.body.Concavity_mean,
+                                "Concave_points_mean": req.body.Concave_points_mean,
+                                "Radius_se": req.body.Radius_se,
+                                "Area_se": req.body.Area_se,
+                                "Radius_worst": req.body.Radius_worst,
+                                "Texture_worst": req.body.Texture_worst,
+                                "Perimeter_worst": req.body.Perimeter_worst,
+                                "Area_worst": req.body.Area_worst,
+                                "Compactness_worst": req.body.Compactness_worst,
+                                "Concavity_worst": req.body.Concavity_worst,
+                                "Concave_points_worst": req.body.Concave_points_worst
+                            }
+                }
 
-  };
-}
-else if(req.body.addDisease=="Heart Disease"){
-var obj={
-  "did": "DID02",
-  "pid": req.body.Patient_name,
-  "test": {
-              "title": "heart_disease",
-              "id": req.body.dis_id,
-              "details":{
-                          "Age" : req.body.Age,
-                          "Sex": req.body.Sex,
-                          "CP": req.body.CP,
-                          "Trestbps": req.body.Trestbps,
-                          "Chol": req.body.Chol,
-                          "FBS": req.body.FBS,
-                          "RestECG": req.body.RestECG,
-                          "Thalach": req.body.Thalach,
-                          "Exang": req.body.Exang,
-                          "Old_peak": req.body.Old_peak,
-                          "Slope": req.body.Slope,
-                          "CA": req.body.CA,
-                          "Thal": req.body.Thal
-                      }
-          }
+      };
+  }
+  else if(req.body.addDisease=="Heart Disease"){
+    var obj={
+      "did": req.params.id,
+      "pid": req.body.Patient_name,
+      "test": {
+                  "title": "heart",
+                  "id": req.body.dis_id,
+                  "details":{
+                              "Age" : req.body.Age,
+                              "Sex": req.body.Sex,
+                              "CP": req.body.CP,
+                              "Trestbps": req.body.Trestbps,
+                              "Chol": req.body.Chol,
+                              "FBS": req.body.FBS,
+                              "RestECG": req.body.RestECG,
+                              "Thalach": req.body.Thalach,
+                              "Exang": req.body.Exang,
+                              "Old_peak": req.body.Old_peak,
+                              "Slope": req.body.Slope,
+                              "CA": req.body.CA,
+                              "Thal": req.body.Thal
+                          }
+              }
 
-};
-}
-else if(req.body.addDisease=="Diabetes"){
-var obj={
-  "did": "DID02",
-  "pid": req.body.Patient_name,
-  "test": {
-              "title": "Diabetes",
-              "id": req.body.dis_id,
-              "details":{
-                          "Pregnancies" :req.body.Pregnancies ,
-                          "Glucose" :req.body.Glucose,
-                          "Blood_Pressure" :req.body.Blood_Pressure,
-                          "Skin_Thickness" :req.body.Skin_Thickness,
-                          "Insulin" :req.body.Insulin,
-                          "BMI" :req.body.BMI,
-                          "Diabetes_Pedigree_Function" :req.body.Diabetes_Pedigree_Function,
-                          "Age" :req.body.Age
-                      }
-          }
+    };
+  }
+  else if(req.body.addDisease=="Diabetes"){
+    var obj={
+      "did": req.params.id,
+      "pid": req.body.Patient_name,
+      "test": {
+                  "title": "diabetes",
+                  "id": req.body.dis_id,
+                  "details":{
+                              "Pregnancies" :req.body.Pregnancies ,
+                              "Glucose" :req.body.Glucose,
+                              "Blood_Pressure" :req.body.Blood_Pressure,
+                              "Skin_Thickness" :req.body.Skin_Thickness,
+                              "Insulin" :req.body.Insulin,
+                              "BMI" :req.body.BMI,
+                              "Diabetes_Pedigree_Function" :req.body.Diabetes_Pedigree_Function,
+                              "Age" :req.body.Age
+                          }
+              }
 
-};
-}
-else{
-  var image=req.body.throat_photo;
-  // console.log(typeof(image));
-  var array = image.split(".");
+    };
+  }
+  else{
+      var image=req.body.throat_photo;
+      // console.log(typeof(image));
+      var array = image.split(".");
 
-  var image_title= array[0];
-  var obj={
+      var image_title= array[0];
+      var obj={
+        "did": req.params.id,
+        "pid": req.body.Patient_name,
+        "test": {
+                  "title": "throat-tumor",
+                  "id": req.body.dis_id,
+                  "details":{
+                              "title": image_title
+                          }
+              }
+      };
+  }
+  const token = req.cookies.token || ''  ;
+  const requestOption = {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": token            
+    },
+    body: JSON.stringify(obj)
+  }
 
-    title: image_title
-  };
-}
+  console.log(requestOption);
 
-  console.log(obj);
-})
+  const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/dashboard/${req.params.id}/`, requestOption);
+  const data = await rawResponse.json();
+  console.log(data);
+  res.redirect(`/doctor/dashboard/${req.params.id}`)
+  // res.render('home', data);
+
+});
 
 app.listen(4200,function(){
   console.log("WebApp is running at port 4200");

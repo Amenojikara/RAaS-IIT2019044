@@ -151,10 +151,14 @@ router.get('/dashboard/:id', doctor_auth, async (req,res, next) => {
         }
         const rawResponse = await fetch(`${URLS.PATIENT_DATA_URL}/dashboard/${patients[i]}`, requestOptions);
         const data = await rawResponse.json();
-        patient_details.push(data);
+        data.tests = data.tests.filter(test => test.supervisor_doctor === did);
+        // console.log(data);
+        patient_details.push(data);            
+
     }
 
     const response = {
+        doctor_id: req.params.id,
         patient_details: patient_details
     }
 
@@ -166,9 +170,10 @@ router.patch('/dashboard/:id', doctor_auth, async (req, res, next) => {
     const did = req.params.id;
     const pid = req.body.pid;
     const test = req.body.test;
-
+    // console.log(did, pid, test);
+    
     // Updating Doctor Schema
-    await Doctor.find({patients: pid}, (err, found) => {
+    await Doctor.find({_id: did, patients: pid}, (err, found) => {
         console.log(found)
         if(err){
             return res.status(400).json({error: err});
@@ -205,16 +210,16 @@ router.patch('/dashboard/:id', doctor_auth, async (req, res, next) => {
 
     // Updating Disease Database
     if(test.title === "diabetes"){
-        helper.diabetes_post(test, did, pid);
+        await helper.diabetes_post(test, did, pid);
     }
     else if(test.title === "cancer"){
-        helper.cancer_post(test, did, pid);
+        await helper.cancer_post(test, did, pid);
     }
     else if(test.title === "heart"){
-        helper.heart_post(test, did, pid);
+        await helper.heart_post(test, did, pid);
     }
     else if(test.title === "throat-tumor"){
-        helper.throat_post(test, did, pid);
+        await helper.throat_post(test, did, pid);
     }
 
     return res.status(200).json({

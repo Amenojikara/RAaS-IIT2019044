@@ -40,7 +40,7 @@
                           <tr>
                             <th scope="row">{{this.title}}</th>
                             <td>{{this.id}}</td>
-                            <td><button>Details</button></td>
+                            <td><button onclick="showDiseaseDetails(`{{this.details}}`)">Details</button></td>
                           </tr>
                         {{/each}}
                         </tbody>
@@ -70,7 +70,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="add_Details" method="POST" action="/doctor/dashboard/">
+          <form class="add_Details" method="POST" action="/doctor/dashboard/{{doctor_id}}">
             <label>Patient id : </label>
             <input type="text" name="Patient_name">
             <br>
@@ -95,13 +95,12 @@
 
               </form> -->
 
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-      </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -114,6 +113,11 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 <script>
+
+function showDiseaseDetails(details){
+  {{!-- details.forEach(f => alert(f)) --}}
+  alert(details)
+}
 
 function addNewPatient(){
   var element=document.querySelectorAll(".row .col-12");
