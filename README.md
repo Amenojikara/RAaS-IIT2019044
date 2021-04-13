@@ -1,7 +1,7 @@
 # RAaS-IIT2019044
 Project Repository for the Software Engineering Course.
 
-### Team Members
+### Contributors
 ```
 Ritesh Raj - IIT2019025(RAJ)
 Ayan Pingle - IIT2019042  (Amenojikara)
