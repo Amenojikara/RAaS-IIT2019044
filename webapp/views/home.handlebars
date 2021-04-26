@@ -40,7 +40,7 @@
                           <tr>
                             <th scope="row">{{this.title}}</th>
                             <td>{{this.id}}</td>
-                            <td><button onclick="showDiseaseDetails(`{{this.details}}`)">Details</button></td>
+                            <td> <a href="/a"> <button onclick="showDiseaseDetails(`{{this.details}}`)">Details</button></a></td>
                           </tr>
                         {{/each}}
                         </tbody>
@@ -116,7 +116,11 @@
 
 function showDiseaseDetails(details){
   {{!-- details.forEach(f => alert(f)) --}}
-  alert(details)
+  var obj= details;
+  // for (const item of Object.entries(details)) {
+  //   alert(item)
+  // }
+  alert(obj)
 }
 
 function addNewPatient(){

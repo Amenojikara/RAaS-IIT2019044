@@ -83,6 +83,27 @@ app.get("/doctor/dashboard/:id", async(req,res) => {
     res.render('home', data);
 })
 
+
+
+app.get("/patient/:id",function(req,res){
+  //res.send(req.params.id);
+
+
+// callback
+superagent
+  .get('http://localhost:3000/patient/dashboard/'+req.params.id)
+  // .get('http://localhost:4200/Doctor_dashboard.html')
+  // .send({ name: 'Manny', species: 'cat' }) // sends a JSON post body
+  // .set('X-API-Key', 'foobar')
+  // .set('accept', 'json')
+  .end((err, response) => {
+    // Calling the end function will send the request
+    // res.send(response);
+    console.log(JSON.parse(response.text))
+    res.render('patient_dash', {layout: 'patient.handlebars' ,data: JSON.parse(response.text)})
+  });
+})
+
 // FORMAT OF JSON FOR API TO BE CALLED IN BELOW ROUTE
 
 // {
@@ -204,7 +225,7 @@ app.post("/doctor/dashboard/:id", async(req,res) => {
     method: "PATCH",
     headers: {
       "Content-type": "application/json",
-      "Authorization": token            
+      "Authorization": token
     },
     body: JSON.stringify(obj)
   }

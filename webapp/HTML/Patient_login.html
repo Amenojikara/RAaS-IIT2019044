@@ -151,7 +151,8 @@ body{
                       </div>
                       <div class="d-flex addbtn">
                     <a href="/patient/register"><button class=" btn btn-lg btn-primary m-3" type="button">sign up</button></a>
-                    <a href="/patient/dashboard">  <button class=" btn btn-lg btn-primary m-3" type="button">login</button></a>
+                    <!-- <a href="/patient/dashboard">  -->
+                       <button id="patient_log" class=" btn btn-lg btn-primary m-3" type="button">login</button>
                     </div>
                       <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
                     </form>
@@ -159,6 +160,13 @@ body{
         </div>
 
       </div>
+      <script>
+      const id= document.getElementById('patient_log');
+         id.addEventListener('click',function(){
+             var id1= document.getElementById('PatientId').value;
+             window.location='/patient/'+id1;
+         })
+      </script>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
