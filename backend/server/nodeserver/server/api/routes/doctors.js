@@ -174,7 +174,7 @@ router.patch('/dashboard/:id', doctor_auth, async (req, res, next) => {
     
     // Updating Doctor Schema
     await Doctor.find({_id: did, patients: pid}, (err, found) => {
-        console.log(found)
+        // console.log(found)
         if(err){
             return res.status(400).json({error: err});
         }
@@ -210,10 +210,10 @@ router.patch('/dashboard/:id', doctor_auth, async (req, res, next) => {
 
     // Updating Disease Database
     if(test.title === "diabetes"){
-        await helper.diabetes_post(test, did, pid);
+        const ret = await helper.diabetes_post(test, did, pid);
     }
     else if(test.title === "cancer"){
-        await helper.cancer_post(test, did, pid);
+        const ret = await helper.cancer_post(test, did, pid);
     }
     else if(test.title === "heart"){
         await helper.heart_post(test, did, pid);

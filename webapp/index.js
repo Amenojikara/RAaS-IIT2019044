@@ -18,7 +18,6 @@ app.use(express.urlencoded());
 app.use(cors());
 app.use(cookieParser());
 
-
 app.get("/", function(req,res){
   res.sendFile(__dirname + "/HTML/startPage.html");
 });
@@ -60,6 +59,7 @@ app.post("/doctor", async (req, res) =>{
   console.log(data);
   if(data.message === 'Auth Successful'){
     res.cookie('token', "token " + data.token);
+    res.cookie('user', req.body.id);
     res.redirect(`/doctor/dashboard/${req.body.id}`)
   } else {
     res.redirect("/");
@@ -79,7 +79,7 @@ app.get("/doctor/dashboard/:id", async(req,res) => {
 
     const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/dashboard/${req.params.id}/`, requestOption);
     const data = await rawResponse.json();
-    console.log(data);
+    // console.log(data);
     res.render('home', data);
 })
 
@@ -106,7 +106,6 @@ app.get("/doctor/dashboard/:id", async(req,res) => {
 // }
 
 app.post("/doctor/dashboard/:id", async(req,res) => {
-  console.log("Khalnayak", req.params.id);
   if(req.body.addDisease=="Cancer"){
       var obj={
         "did": req.params.id,
@@ -209,15 +208,49 @@ app.post("/doctor/dashboard/:id", async(req,res) => {
     body: JSON.stringify(obj)
   }
 
-  console.log(requestOption);
+  // console.log(requestOption);
 
   const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/dashboard/${req.params.id}/`, requestOption);
   const data = await rawResponse.json();
-  console.log(data);
+  // console.log(data);
   res.redirect(`/doctor/dashboard/${req.params.id}`)
   // res.render('home', data);
 
 });
+
+app.get("/doctor/dashboard/:title/:disease_id", async (req,res) => {
+  const token = req.cookies.token || ''  ;
+  const user = req.cookies.user || ''  ;
+  const disease_title = req.params.title;
+  const disease_id = req.params.disease_id;
+
+  const requestOption = {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": token
+    }
+  }
+  const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/dashboard/${user}/`, requestOption);
+  const data = await rawResponse.json();
+
+  let data_transfer;
+
+  const pd = data.patient_details;
+  for(var i=0;i<pd.length;i++){
+    for(var j=0;j<pd[i].tests.length;j++){
+      if(pd[i].tests[j].title === disease_title && pd[i].tests[j].id === disease_id){
+        data_transfer = pd[i].tests[j];
+      }
+    }
+  }
+  
+  console.log(data_transfer);
+  res.render("", data_transfer);
+
+})
+
+
 
 app.listen(4200,function(){
   console.log("WebApp is running at port 4200");

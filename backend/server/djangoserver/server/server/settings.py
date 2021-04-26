@@ -119,8 +119,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-ALLOWED_HOSTS = ['eb662595c7f4.ngrok.io',
-                 'localhost']
+# ALLOWED_HOSTS = ['93132a042aa4.ngrok.io',
+#                  'localhost']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

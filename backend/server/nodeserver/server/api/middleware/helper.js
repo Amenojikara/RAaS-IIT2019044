@@ -7,6 +7,7 @@ const Throat = require('../models/disease/throat');
 const URLS = require('../../baseUrls');
 
 const getPrediction = async (test) => {
+    console.log(test);
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -14,9 +15,21 @@ const getPrediction = async (test) => {
         },
         body: JSON.stringify(test.details)
     }
+    console.log(`${URLS.BASE_URL}/${test.title}/`);
+    const rawResponse = await fetch(`${URLS.BASE_URL}/${test.title}/`, requestOptions);   
 
-    const rawResponse = await fetch(`${URLS.BASE_URL}/${test.title}/`, requestOptions);    
+    // const rawResponse = await axios({
+    //     method: 'post',
+    //     url: `${URLS.BASE_URL}/${test.title}/`,
+    //     data: JSON.stringify(test.details),
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    // }); 
+    
+    console.log(rawResponse);
     const data = await rawResponse.json();
+    console.log(data);
     return data.prediction
 };
 
@@ -32,13 +45,13 @@ exports.cancer_post = async (test, did, pid) => {
         prediction: pred
     })
     cancer.save()
+    return 0;
 };
 
 // Diabetes GET/POST
 exports.diabetes_post = async (test, did, pid) => {
 
     const pred = await getPrediction(test);
-
     const diabetes = new Diabetes({
         _id: test.id,
         patient_id: pid,
@@ -47,6 +60,7 @@ exports.diabetes_post = async (test, did, pid) => {
         prediction: pred
     })
     diabetes.save()
+    return 0;
 };
 
 // Heart GET/POST

@@ -6,6 +6,7 @@ const Diabetes = require('../models/disease/diabetes');
 const Cancer = require('../models/disease/cancer');
 const Heart = require('../models/disease/heart');
 const Throat = require('../models/disease/throat');
+const patient_auth = require('../middleware/patient-check-auth');
 
 router.post('/register', (req, res, next) => {
     Patient.find({_id: req.body._id})

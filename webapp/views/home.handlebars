@@ -20,7 +20,7 @@
     {{#each patient_details}}
           <div class="row w-100 d-flex justify-content-center mt-3 mt-md-5 mt-sm-3 align-items-start">
               <div class="col-md-8 col-sm-10 justify-content-center mb-4">
-                <div class="card p-3">
+                  <div class="card p-3">
                     <div>
                       <h5 class="card-title">Patient_id:{{this._id}}</h5>
                       <h6 class="card-subtitle mb-2 text-muted">Name: {{this.name}}</h6>
@@ -40,14 +40,18 @@
                           <tr>
                             <th scope="row">{{this.title}}</th>
                             <td>{{this.id}}</td>
-                            <td><button onclick="showDiseaseDetails(`{{this.details}}`)">Details</button></td>
+                            <td>
+                              <form method="GET" action="./{{this.title}}/{{this.id}}/">
+                                <button>Details</button>
+                              </form>
+                            </td>
                           </tr>
                         {{/each}}
                         </tbody>
-                      </table>
+                    </table>
                   </div>
-                </div>
               </div>
+          </div>
 
 
               {{/each}}
@@ -113,11 +117,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 <script>
-
-function showDiseaseDetails(details){
-  {{!-- details.forEach(f => alert(f)) --}}
-  alert(details)
-}
 
 function addNewPatient(){
   var element=document.querySelectorAll(".row .col-12");
