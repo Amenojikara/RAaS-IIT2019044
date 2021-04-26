@@ -265,10 +265,8 @@ app.get("/doctor/dashboard/:title/:disease_id", async (req,res) => {
       }
     }
   }
-  
-  console.log(data_transfer);
-  res.render("", data_transfer);
 
+  console.log(data_transfer);
 })
 
 
