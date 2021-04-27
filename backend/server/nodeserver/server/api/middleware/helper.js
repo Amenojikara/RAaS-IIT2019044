@@ -18,22 +18,13 @@ const getPrediction = async (test) => {
     console.log(`${URLS.BASE_URL}/${test.title}/`);
     const rawResponse = await fetch(`${URLS.BASE_URL}/${test.title}/`, requestOptions);   
 
-    // const rawResponse = await axios({
-    //     method: 'post',
-    //     url: `${URLS.BASE_URL}/${test.title}/`,
-    //     data: JSON.stringify(test.details),
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    // }); 
-    
     console.log(rawResponse);
     const data = await rawResponse.json();
     console.log(data);
     return data.prediction
 };
 
-// Cancer GET/POST
+// Cancer POST
 exports.cancer_post = async (test, did, pid) => {
     
     const pred = await getPrediction(test);
@@ -48,7 +39,7 @@ exports.cancer_post = async (test, did, pid) => {
     return 0;
 };
 
-// Diabetes GET/POST
+// Diabetes POST
 exports.diabetes_post = async (test, did, pid) => {
 
     const pred = await getPrediction(test);
@@ -63,11 +54,10 @@ exports.diabetes_post = async (test, did, pid) => {
     return 0;
 };
 
-// Heart GET/POST
+// Heart POST
 exports.heart_post = async (test, did, pid) => {
 
     const pred = await getPrediction(test);
-
     const heart = new Heart({
         _id: test.id,
         patient_id: pid,
@@ -78,7 +68,7 @@ exports.heart_post = async (test, did, pid) => {
     heart.save()
 };
 
-// Throat GET/POST
+// Throat POST
 exports.throat_post = async (test, did, pid) => {
 
     const result = await getPrediction(test);

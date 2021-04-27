@@ -10,8 +10,6 @@ const Doctor = require('../models/doctor');
 const helper = require('../middleware/helper');
 const URLS = require('../../baseUrls');
 const doctor_auth = require('../middleware/doctor-check-auth');
-// const app = require('../../app');
-// const { getMaxListeners } = require('../../app');
 
 const bcrypt = require('bcrypt'); // For hashing passwords
 const jwt = require('jsonwebtoken'); // For generating tokens
@@ -64,7 +62,6 @@ router.post('/login', (req, res, next) => {
             if(user.length < 1){
                 return res.status(401).json({
                     message: "Auth Failed",
-                    autho: "Shree",
                     data: req.body
                 });
 
@@ -94,7 +91,6 @@ router.post('/login', (req, res, next) => {
                 }
                 res.status(401).json({
                     message: "Auth Failed",
-                    autho: "Shreesh"
                 });
             })
         })
@@ -134,7 +130,10 @@ router.get('/profile/:id', (req, res, next) => {
 
 router.get('/dashboard/:id', doctor_auth, async (req,res, next) => {
     const did = req.params.id;
-    // console.log(req.headers)
+    const token = req.headers.authorization;
+    
+    // console.log(req.headers, token)
+
     let doc = await Doctor.findOne({_id: did});
     if(doc === null){
         return res.status(404).json({message:"Doctor not found!"});
@@ -146,12 +145,20 @@ router.get('/dashboard/:id', doctor_auth, async (req,res, next) => {
         requestOptions = {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": token
             }
         }
         const rawResponse = await fetch(`${URLS.PATIENT_DATA_URL}/dashboard/${patients[i]}`, requestOptions);
         const data = await rawResponse.json();
-        data.tests = data.tests.filter(test => test.supervisor_doctor === did);
+        console.log(data);
+        data.tests = data.tests.filter(test => {
+            if(test.supervisor_doctor){
+                return test.supervisor_doctor === did ;
+            } else {
+                return false;
+            }
+        });
         // console.log(data);
         patient_details.push(data);            
 

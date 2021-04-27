@@ -1,8 +1,6 @@
 const express = require("express");
-const bodyParser= require("body-parser");
-const superagent = require('superagent');
-const https= require("https");
 const app= express();
+const bodyParser= require("body-parser");
 const URLS = require('./baseUrls');
 const fetch = require("node-fetch");
 var exphbs  = require('express-handlebars');
@@ -19,23 +17,99 @@ app.use(cors());
 app.use(cookieParser());
 
 app.get("/", function(req,res){
+  res.clearCookie('user');
+  res.clearCookie('token');
   res.sendFile(__dirname + "/HTML/startPage.html");
 });
 
-
-app.get("/patient",function(req,res){
-  res.sendFile(__dirname+"/HTML/Patient_login.html");
-});
+/* -------------- PATIENT ROUTES ---------------- */ 
 
 app.get("/patient/register",function(req,res){
   res.sendFile(__dirname+"/HTML/Patient_Register.html");
 });
 
-app.get("/patient/dashboard",function(req,res){
-  res.sendFile(__dirname+"/HTML/Patient_dashboard.html");
+app.post("/patient/register", async (req,res) => {
+  const body = {
+    _id: req.body.id,
+    name: req.body.name,
+    email: req.body.email,
+    token: req.body.token
+  }
+
+  const requestOption = {
+    method: "POST",
+    headers: {"Content-type": "application/json"},
+    body: JSON.stringify(body)
+  }
+
+  console.log(body);
+  console.log(`${URLS.SERVER_URL}/patient/register/`);
+  const rawResponse = await fetch(`${URLS.SERVER_URL}/patient/register/`, requestOption)
+  const data = await rawResponse.json();
+  console.log(data);
+  if(data.message === "New Patient Created"){
+    console.log("New Patient Created");
+    res.redirect('/patient');
+  } else {
+    res.redirect("/");
+  }
+
 });
 
+app.get("/patient", (req,res) => {
+  res.clearCookie('user');
+  res.clearCookie('token');
+  res.sendFile(__dirname+"/HTML/Patient_login.html");
+});
+
+app.post("/patient", async (req,res) => {
+  const body = {
+    _id: `${req.body.id}`,
+    token: `${req.body.token}`
+  }
+  // console.log(body);
+  const requestOption = {
+    method: "POST",
+    headers: {"Content-type": "application/json"},
+    body: JSON.stringify(body)
+  }
+
+  // console.log(requestOption);
+
+  const rawResponse = await fetch(`${URLS.SERVER_URL}/patient/login/`, requestOption)
+  const data = await rawResponse.json();
+  
+  // console.log(data);
+  
+  if(data.message === 'Auth Successful'){
+    res.cookie('token', "token " + data.token);
+    res.cookie('user', req.body.id);
+    res.redirect(`/patient/dashboard/${req.body.id}`)
+  } else {
+    res.redirect("/");
+  }
+
+});
+
+app.get("/patient/dashboard/:id", async (req,res) => {
+  const token = req.cookies.token || ''  ;
+  const requestOption = {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": token
+    }
+  }
+  const rawResponse = await fetch(`${URLS.SERVER_URL}/patient/dashboard/${req.params.id}/`, requestOption);
+  const data = await rawResponse.json();
+  res.render('patient_dash', {layout: 'patient.handlebars' ,data: data})
+
+})
+
+/* -------------- DOCTOR ROUTES ---------------- */ 
 app.get("/doctor",function(req,res){
+  res.clearCookie('user');
+  res.clearCookie('token');
   res.sendFile(__dirname+"/HTML/Doctor_login.html");
 });
 
@@ -51,8 +125,6 @@ app.post("/doctor", async (req, res) =>{
   }
 
   console.log(requestOption);
-
-  // console.log(requestOption)
 
   const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/login/`, requestOption)
   const data = await rawResponse.json();
@@ -75,33 +147,13 @@ app.get("/doctor/dashboard/:id", async(req,res) => {
         "Content-type": "application/json",
         "Authorization": token
       }
+      
     }
 
     const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/dashboard/${req.params.id}/`, requestOption);
     const data = await rawResponse.json();
     // console.log(data);
     res.render('home', data);
-})
-
-
-
-app.get("/patient/:id",function(req,res){
-  //res.send(req.params.id);
-
-
-// callback
-superagent
-  .get('http://localhost:3000/patient/dashboard/'+req.params.id)
-  // .get('http://localhost:4200/Doctor_dashboard.html')
-  // .send({ name: 'Manny', species: 'cat' }) // sends a JSON post body
-  // .set('X-API-Key', 'foobar')
-  // .set('accept', 'json')
-  .end((err, response) => {
-    // Calling the end function will send the request
-    // res.send(response);
-    console.log(JSON.parse(response.text))
-    res.render('patient_dash', {layout: 'patient.handlebars' ,data: JSON.parse(response.text)})
-  });
 })
 
 // FORMAT OF JSON FOR API TO BE CALLED IN BELOW ROUTE
@@ -135,20 +187,20 @@ app.post("/doctor/dashboard/:id", async(req,res) => {
                     "title": "cancer",
                     "id": req.body.dis_id,
                     "details":{
-                                "Radius_mean" : req.body.Radius_mean,
-                                "Perimeter_mean": req.body.Perimeter_mean ,
-                                "Area_mean": req.body.Area_mean,
-                                "Concavity_mean": req.body.Concavity_mean,
-                                "Concave_points_mean": req.body.Concave_points_mean,
-                                "Radius_se": req.body.Radius_se,
-                                "Area_se": req.body.Area_se,
-                                "Radius_worst": req.body.Radius_worst,
-                                "Texture_worst": req.body.Texture_worst,
-                                "Perimeter_worst": req.body.Perimeter_worst,
-                                "Area_worst": req.body.Area_worst,
-                                "Compactness_worst": req.body.Compactness_worst,
-                                "Concavity_worst": req.body.Concavity_worst,
-                                "Concave_points_worst": req.body.Concave_points_worst
+                                "radius_mean" : req.body.Radius_mean,
+                                "perimeter_mean": req.body.Perimeter_mean ,
+                                "area_mean": req.body.Area_mean,
+                                "concavity_mean": req.body.Concavity_mean,
+                                "concave_points_mean": req.body.Concave_points_mean,
+                                "radius_se": req.body.Radius_se,
+                                "area_se": req.body.Area_se,
+                                "radius_worst": req.body.Radius_worst,
+                                "texture_worst": req.body.Texture_worst,
+                                "perimeter_worst": req.body.Perimeter_worst,
+                                "area_worst": req.body.Area_worst,
+                                "compactness_worst": req.body.Compactness_worst,
+                                "concavity_worst": req.body.Concavity_worst,
+                                "concave_points_worst": req.body.Concave_points_worst
                             }
                 }
 
@@ -162,19 +214,19 @@ app.post("/doctor/dashboard/:id", async(req,res) => {
                   "title": "heart",
                   "id": req.body.dis_id,
                   "details":{
-                              "Age" : req.body.Age,
-                              "Sex": req.body.Sex,
-                              "CP": req.body.CP,
-                              "Trestbps": req.body.Trestbps,
-                              "Chol": req.body.Chol,
-                              "FBS": req.body.FBS,
-                              "RestECG": req.body.RestECG,
-                              "Thalach": req.body.Thalach,
-                              "Exang": req.body.Exang,
-                              "Old_peak": req.body.Old_peak,
-                              "Slope": req.body.Slope,
-                              "CA": req.body.CA,
-                              "Thal": req.body.Thal
+                              "age" : req.body.Age,
+                              "sex": req.body.Sex,
+                              "cp": req.body.CP,
+                              "trestbps": req.body.Trestbps,
+                              "chol": req.body.Chol,
+                              "fbs": req.body.FBS,
+                              "restecg": req.body.RestECG,
+                              "thalach": req.body.Thalach,
+                              "exang": req.body.Exang,
+                              "old_peak": req.body.Old_peak,
+                              "slope": req.body.Slope,
+                              "ca": req.body.CA,
+                              "thal": req.body.Thal
                           }
               }
 
@@ -190,11 +242,11 @@ app.post("/doctor/dashboard/:id", async(req,res) => {
                   "details":{
                               "Pregnancies" :req.body.Pregnancies ,
                               "Glucose" :req.body.Glucose,
-                              "Blood_Pressure" :req.body.Blood_Pressure,
-                              "Skin_Thickness" :req.body.Skin_Thickness,
+                              "BloodPressure" :req.body.Blood_Pressure,
+                              "SkinThickness" :req.body.Skin_Thickness,
                               "Insulin" :req.body.Insulin,
                               "BMI" :req.body.BMI,
-                              "Diabetes_Pedigree_Function" :req.body.Diabetes_Pedigree_Function,
+                              "DiabetesPedigreeFunction" :req.body.Diabetes_Pedigree_Function,
                               "Age" :req.body.Age
                           }
               }
@@ -203,7 +255,7 @@ app.post("/doctor/dashboard/:id", async(req,res) => {
   }
   else{
       var image=req.body.throat_photo;
-      // console.log(typeof(image));
+
       var array = image.split(".");
 
       var image_title= array[0];
@@ -265,10 +317,9 @@ app.get("/doctor/dashboard/:title/:disease_id", async (req,res) => {
       }
     }
   }
-
   console.log(data_transfer);
-})
 
+})
 
 
 app.listen(4200,function(){

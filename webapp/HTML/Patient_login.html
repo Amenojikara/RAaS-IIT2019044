@@ -137,22 +137,21 @@ body{
                    <img src="../Images/patient.png" alt=".." height="500" width="400">
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 d-flex text-center justify-content-center align-items-center my-sm-4 order-1" id="second">
-                    <form>
+                    <form method="POST" action="/patient">
+                      
                       <img class="mb-4" src="../Images/heart.png" alt="" width="57" height="57">
                       <!-- <h1 class="h3 mb-3 fw-normal" id="sign">Please sign in</h1> -->
+                      
                       <label for="PatientId" class="visually-hidden">Patient  ID</label>
-                      <input type="text" id="PatientId" class="form-control " placeholder="Patient Id" required="" autofocus="">
+                      <input type="text" id="PatientId" class="form-control " placeholder="Patient Id" required="" autofocus="" name="id">
+                      
                       <label for="AccessToken" class="visually-hidden">Access Token</label>
-                      <input type="text" id="AccessToken" class="form-control my-4" placeholder="Access Token" required="">
-                      <div class="checkbox mb-3">
-                        <label>
-                          <input type="checkbox" value="remember-me"> Remember me
-                        </label>
-                      </div>
+                      <input type="text" id="AccessToken" class="form-control my-4" placeholder="Access Token" required="" name="token">
+                      
                       <div class="d-flex addbtn">
                     <a href="/patient/register"><button class=" btn btn-lg btn-primary m-3" type="button">sign up</button></a>
                     <!-- <a href="/patient/dashboard">  -->
-                       <button id="patient_log" class=" btn btn-lg btn-primary m-3" type="button">login</button>
+                       <button id="patient_log" class=" btn btn-lg btn-primary m-3" type="submit">login</button>
                     </div>
                       <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
                     </form>
