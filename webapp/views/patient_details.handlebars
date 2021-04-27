@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <div>
     <h2>Disease : {{data.title}}</h2>
     <h2>Disease ID : {{data.id}}</h2>
@@ -18,4 +18,41 @@
     {{/if}}
   </div>
 
+</div> -->
+<div class="row maindiv">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title title_card">Report</h2>
+        <p class="card-text">
+          <h4 class="heading_head">Disease  :<h4 class="headings">  {{data.title}}</h4></h4>
+          <br>
+          <br>
+          <h4 class="heading_head" >Disease ID  :<h4 class="headings">  {{data.id}}</h4></h4>
+          <br>
+          <br>
+          <h4 class="heading_head">Doctor  :<h4 class="headings">  {{data.supervisor_doctor}}</h4></h4>
+          <hr>
+          <h4>Details : </h4>
+          <ul>
+            {{#each data.details}}
+            <li> {{@key}} : {{this}}</li>
+              {{/each}}
+          </ul>
+          {{#if data.prediction}}
+          <h4 class="pred_color">
+            Suffering from {{data.title}} disease
+          </h4>
+          {{else}}
+          <h4 class="pred_color">Not suffering</h4>
+          {{/if}}
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
