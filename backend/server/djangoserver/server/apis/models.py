@@ -107,7 +107,7 @@ Heart disease
     "oldpeak": 0,
     "slope": 2,
     "ca": 2,
-    "thal": 3
+    "thal": 3  
     "prediction": 0
 }
 '''

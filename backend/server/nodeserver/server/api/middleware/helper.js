@@ -1,3 +1,5 @@
+const express = require("express");
+const app= express();
 const fetch = require("node-fetch");
 
 const Cancer = require('../models/disease/cancer');
@@ -5,6 +7,9 @@ const Diabetes = require('../models/disease/diabetes');
 const Heart = require('../models/disease/heart');
 const Throat = require('../models/disease/throat');
 const URLS = require('../../baseUrls');
+
+app.use(express.json());
+app.use(express.urlencoded());
 
 const getPrediction = async (test) => {
     console.log(test);
@@ -15,7 +20,7 @@ const getPrediction = async (test) => {
         },
         body: JSON.stringify(test.details)
     }
-    console.log(`${URLS.BASE_URL}/${test.title}/`);
+    // console.log(`${URLS.BASE_URL}/${test.title}/`);
     const rawResponse = await fetch(`${URLS.BASE_URL}/${test.title}/`, requestOptions);   
 
     console.log(rawResponse);

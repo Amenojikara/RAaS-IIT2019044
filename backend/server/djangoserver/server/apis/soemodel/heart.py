@@ -37,12 +37,12 @@ def heart_predictor(data_dict):
 
     for feature, val in data_dict.items():
         if(feature == 'cp'):
-            cp[val] = 1
+            cp[int(val)] = 1
         if(feature == 'thal'):
-            thal[val] = 1
+            thal[int(val)] = 1
         if(feature == 'slope'):
-            slope[val] = 1
-        data.append(val)
+            slope[int(val)] = 1
+        data.append(int(val))
     data = data + cp + thal + slope
 
     

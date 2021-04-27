@@ -149,7 +149,7 @@ router.get('/dashboard/:id', doctor_auth, async (req,res, next) => {
                 "Authorization": token
             }
         }
-        const rawResponse = await fetch(`${URLS.PATIENT_DATA_URL}/dashboard/${patients[i]}`, requestOptions);
+        const rawResponse = await fetch(`${URLS.PATIENT_DATA_URL}/dashboard/${patients[i]}/`, requestOptions);
         const data = await rawResponse.json();
         console.log(data);
         data.tests = data.tests.filter(test => {
@@ -223,10 +223,10 @@ router.patch('/dashboard/:id', doctor_auth, async (req, res, next) => {
         const ret = await helper.cancer_post(test, did, pid);
     }
     else if(test.title === "heart"){
-        await helper.heart_post(test, did, pid);
+        const ret = await helper.heart_post(test, did, pid);
     }
     else if(test.title === "throat-tumor"){
-        await helper.throat_post(test, did, pid);
+        const ret = await helper.throat_post(test, did, pid);
     }
 
     return res.status(200).json({

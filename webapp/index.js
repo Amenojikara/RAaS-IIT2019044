@@ -152,7 +152,7 @@ app.get("/doctor/dashboard/:id", async(req,res) => {
 
     const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/dashboard/${req.params.id}/`, requestOption);
     const data = await rawResponse.json();
-    // console.log(data);
+    console.log(data);
     res.render('home', data);
 })
 
@@ -179,7 +179,7 @@ app.get("/doctor/dashboard/:id", async(req,res) => {
 // }
 
 app.post("/doctor/dashboard/:id", async(req,res) => {
-  if(req.body.addDisease=="Cancer"){
+  if(req.body.addDisease==="Cancer"){
       var obj={
         "did": req.params.id,
         "pid": req.body.Patient_name,
@@ -206,7 +206,7 @@ app.post("/doctor/dashboard/:id", async(req,res) => {
 
       };
   }
-  else if(req.body.addDisease=="Heart Disease"){
+  else if(req.body.addDisease==="Heart Disease"){
     var obj={
       "did": req.params.id,
       "pid": req.body.Patient_name,
@@ -223,7 +223,7 @@ app.post("/doctor/dashboard/:id", async(req,res) => {
                               "restecg": req.body.RestECG,
                               "thalach": req.body.Thalach,
                               "exang": req.body.Exang,
-                              "old_peak": req.body.Old_peak,
+                              "oldpeak": req.body.Old_peak,
                               "slope": req.body.Slope,
                               "ca": req.body.CA,
                               "thal": req.body.Thal
@@ -232,7 +232,7 @@ app.post("/doctor/dashboard/:id", async(req,res) => {
 
     };
   }
-  else if(req.body.addDisease=="Diabetes"){
+  else if(req.body.addDisease==="Diabetes"){
     var obj={
       "did": req.params.id,
       "pid": req.body.Patient_name,
@@ -281,7 +281,7 @@ app.post("/doctor/dashboard/:id", async(req,res) => {
     body: JSON.stringify(obj)
   }
 
-  // console.log(requestOption);
+  console.log(requestOption);
 
   const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/dashboard/${req.params.id}/`, requestOption);
   const data = await rawResponse.json();
@@ -321,8 +321,6 @@ app.get("/doctor/dashboard/:title/:disease_id", async (req,res) => {
   res.render('patient_details',{layout: 'details.handlebars' ,data: data_transfer})
 })
 
-})
-
 app.get("/patient/dashboard/:title/:disease_id", async (req,res) => {
   const token = req.cookies.token || ''  ;
   const user = req.cookies.user || ''  ;
@@ -341,15 +339,13 @@ app.get("/patient/dashboard/:title/:disease_id", async (req,res) => {
 
   let data_transfer;
 
-  const pd = data.patient_details;
+  const pd = data.tests;
+
   for(var i=0;i<pd.length;i++){
-    for(var j=0;j<pd[i].tests.length;j++){
-      if(pd[i].tests[j].title === disease_title && pd[i].tests[j].id === disease_id){
-        data_transfer = pd[i].tests[j];
-      }
+      if(pd[i].title === disease_title && pd[i].id === disease_id){
+        data_transfer = pd[i];
     }
   }
-
   console.log(data_transfer);
   res.render('patient_details',{layout: 'details.handlebars' ,data: data_transfer})
 })
