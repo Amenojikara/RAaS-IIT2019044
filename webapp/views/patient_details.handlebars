@@ -1,0 +1,21 @@
+<div>
+  <div>
+    <h2>Disease : {{data.title}}</h2>
+    <h2>Disease ID : {{data.id}}</h2>
+    <h2>Doctor :{{data.supervisor_doctor}}</h2>
+    <h2>Details</h2>
+    <ul>
+      {{#each data.details}}
+      <li> {{@key}} : {{this}}</li>
+        {{/each}}
+    </ul>
+    {{#if data.prediction}}
+    <h2>
+      Suffering from {{data.title}} disease.
+    </h2>
+    {{else}}
+    <h2>BACH GYA BHAI.</h2>
+    {{/if}}
+  </div>
+
+</div>

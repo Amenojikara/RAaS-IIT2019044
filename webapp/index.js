@@ -318,8 +318,44 @@ app.get("/doctor/dashboard/:title/:disease_id", async (req,res) => {
     }
   }
   console.log(data_transfer);
+  res.render('patient_details',{layout: 'details.handlebars' ,data: data_transfer})
+})
 
 })
+
+app.get("/patient/dashboard/:title/:disease_id", async (req,res) => {
+  const token = req.cookies.token || ''  ;
+  const user = req.cookies.user || ''  ;
+  const disease_title = req.params.title;
+  const disease_id = req.params.disease_id;
+
+  const requestOption = {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": token
+    }
+  }
+  const rawResponse = await fetch(`${URLS.SERVER_URL}/patient/dashboard/${user}/`, requestOption);
+  const data = await rawResponse.json();
+
+  let data_transfer;
+
+  const pd = data.patient_details;
+  for(var i=0;i<pd.length;i++){
+    for(var j=0;j<pd[i].tests.length;j++){
+      if(pd[i].tests[j].title === disease_title && pd[i].tests[j].id === disease_id){
+        data_transfer = pd[i].tests[j];
+      }
+    }
+  }
+
+  console.log(data_transfer);
+  res.render('patient_details',{layout: 'details.handlebars' ,data: data_transfer})
+})
+
+
+
 
 
 app.listen(4200,function(){
