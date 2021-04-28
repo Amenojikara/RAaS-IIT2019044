@@ -1,4 +1,14 @@
 
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-storage.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-analytics.js"></script>
+
+
+
+
       <div class="container-fluid min-vh-100 d-flex">
           <div class="sidebar
            min-vh-100">
@@ -116,7 +126,36 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+
+<!-- for uploading image on firebase -->
+
+
+
 <script>
+
+var firebaseConfig = {
+    apiKey: "AIzaSyCdwwGMcKmt-3jRw-jZMdmIR4AG1B03WaQ",
+    authDomain: "elegant-tangent-306908.firebaseapp.com",
+    projectId: "elegant-tangent-306908",
+    storageBucket: "elegant-tangent-306908.appspot.com",
+    messagingSenderId: "515541513081",
+    appId: "1:515541513081:web:13b1c8513f3414a641b5a8",
+    measurementId: "G-5J9SMSDCE0"
+  };
+  // Initialize Firebase
+   firebase.initializeApp(firebaseConfig);
+  firebase.anlytics();
+
+
+
+</script>
+
+<script>
+
+// for uploading image auth
+
+  // console.log(firebase);
+  /////////////////////////////
 
 function addNewPatient(){
   var element=document.querySelectorAll(".row .col-12");
@@ -201,13 +240,50 @@ function addNewPatient(){
       lab.appendChild(textnode);
       var node=document.createElement("INPUT");
       node.type="file";
-      node.name="throat_photo"
+      node.name="throat_photo";
+      node.id="photo"
+      var node1=document.createElement("BUTTON");
+      node1.type="button";
+      node1.onclick= uploadImage;
+      var textButton = document.createTextNode("Save Image");
+      node1.appendChild(textButton);
       list.appendChild(lab);
       document.getElementById("detailDisease").appendChild(list);
       list.appendChild(node);
       document.getElementById("detailDisease").appendChild(list);
+      list.appendChild(node1);
+      document.getElementById("detailDisease").appendChild(list);
+
     }
-  });
+
+    function uploadImage(){
+      alert("hii");
+      const ref = firebase.storage().ref()
+      // ref.child('xyz/')
+      const file = document.querySelector('#photo').files[0];
+      const name = file.name
+
+      const metadata = {
+        contentType: file.type,
+        // fullPath: "xyz"
+
+      }
+      const task = ref.child(name).put(file, metadata)
+
+      task
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+          console.log(url)
+          alert("image added")
+          const imagei = document.querySelector('#image')
+          imagei.src = url
+        })
+    }
+
+
+
+  }
+);
 
   // Append <li> to <ul> with id="myList"
 </script>
