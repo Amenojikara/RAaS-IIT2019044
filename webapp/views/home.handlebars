@@ -133,17 +133,27 @@
 
 <script>
 
-var firebaseConfig = {
-    apiKey: "AIzaSyCdwwGMcKmt-3jRw-jZMdmIR4AG1B03WaQ",
-    authDomain: "elegant-tangent-306908.firebaseapp.com",
-    projectId: "elegant-tangent-306908",
-    storageBucket: "elegant-tangent-306908.appspot.com",
-    messagingSenderId: "515541513081",
-    appId: "1:515541513081:web:13b1c8513f3414a641b5a8",
-    measurementId: "G-5J9SMSDCE0"
+  {{!-- var firebaseConfig = {
+      apiKey: "AIzaSyCdwwGMcKmt-3jRw-jZMdmIR4AG1B03WaQ",
+      authDomain: "elegant-tangent-306908.firebaseapp.com",
+      projectId: "elegant-tangent-306908",
+      storageBucket: "elegant-tangent-306908.appspot.com",
+      messagingSenderId: "515541513081",
+      appId: "1:515541513081:web:13b1c8513f3414a641b5a8",
+      measurementId: "G-5J9SMSDCE0"
+  }; --}}
+  var firebaseConfig = {
+    apiKey: "AIzaSyBcelzXn0WwRk2xxnQlnt77m4rsoeVTVqc",
+    authDomain: "raas-842a2.firebaseapp.com",
+    databaseURL: "https://raas-842a2-default-rtdb.firebaseio.com",
+    projectId: "raas-842a2",
+    storageBucket: "raas-842a2.appspot.com",
+    messagingSenderId: "935267522259",
+    appId: "1:935267522259:web:01e70f320446c51164a626",
+    measurementId: "G-86FLHWE4XW"
   };
   // Initialize Firebase
-   firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
   firebase.anlytics();
 
 
@@ -257,18 +267,14 @@ function addNewPatient(){
     }
 
     function uploadImage(){
-      alert("hii");
       const ref = firebase.storage().ref()
-      // ref.child('xyz/')
       const file = document.querySelector('#photo').files[0];
       const name = file.name
 
       const metadata = {
         contentType: file.type,
-        // fullPath: "xyz"
-
       }
-      const task = ref.child(name).put(file, metadata)
+      const task = ref.child("mri_images/"+name).put(file, metadata)
 
       task
         .then(snapshot => snapshot.ref.getDownloadURL())
@@ -279,9 +285,6 @@ function addNewPatient(){
           imagei.src = url
         })
     }
-
-
-
   }
 );
 
