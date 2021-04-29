@@ -16,13 +16,15 @@ app.use(express.urlencoded());
 app.use(cors());
 app.use(cookieParser());
 
+var hbs = exphbs.create({});
+
 app.get("/", function(req,res){
   res.clearCookie('user');
   res.clearCookie('token');
   res.sendFile(__dirname + "/HTML/startPage.html");
 });
 
-/* -------------- PATIENT ROUTES ---------------- */ 
+/* -------------- PATIENT ROUTES ---------------- */
 
 app.get("/patient/register",function(req,res){
   res.sendFile(__dirname+"/HTML/Patient_Register.html");
@@ -78,9 +80,9 @@ app.post("/patient", async (req,res) => {
 
   const rawResponse = await fetch(`${URLS.SERVER_URL}/patient/login/`, requestOption)
   const data = await rawResponse.json();
-  
+
   // console.log(data);
-  
+
   if(data.message === 'Auth Successful'){
     res.cookie('token', "token " + data.token);
     res.cookie('user', req.body.id);
@@ -106,7 +108,7 @@ app.get("/patient/dashboard/:id", async (req,res) => {
 
 })
 
-/* -------------- DOCTOR ROUTES ---------------- */ 
+/* -------------- DOCTOR ROUTES ---------------- */
 app.get("/doctor",function(req,res){
   res.clearCookie('user');
   res.clearCookie('token');
@@ -147,7 +149,7 @@ app.get("/doctor/dashboard/:id", async(req,res) => {
         "Content-type": "application/json",
         "Authorization": token
       }
-      
+
     }
 
     const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/dashboard/${req.params.id}/`, requestOption);
@@ -351,6 +353,12 @@ app.get("/patient/dashboard/:title/:disease_id", async (req,res) => {
 })
 
 
+hbs.handlebars.registerHelper('ifCond', function(v1, v2, options) {
+  if(v1 === v2) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
 
 
 
