@@ -13,12 +13,12 @@ Shreesh Swaraj - IIT2019044
 1. Running webapp server
 > cd webapp 
 > npm install
-> nodemon index.js
+> node index.js
 
 2. Running Node Server
 > cd backend/server/nodemon/server/
 > npm install
-> nodemon server.js
+> node server.js
 
 3. Running Django Server
 > cd backend/server/djangoserver/server
