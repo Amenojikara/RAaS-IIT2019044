@@ -21,4 +21,6 @@ Shreesh Swaraj - IIT2019044
 3. Running Django Server
 > cd backend/server/djangoserver/server
 > python manage.py runserver
+
+4. Open http://localhost:4200 in browser
 ```
