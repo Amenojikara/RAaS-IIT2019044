@@ -15,7 +15,6 @@ throat_prediction/
 /build
 
 # misc
-.env
 .eslintcache
 .DS_Store
 .env.local
