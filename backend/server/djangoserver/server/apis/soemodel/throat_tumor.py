@@ -153,8 +153,5 @@ def throat_tumor_predictor(id):
     # print(ret)
 
     js = json.dumps(ret, cls=NumpyEncoder)
-
-    return ret
     
-
-
+    return ret
