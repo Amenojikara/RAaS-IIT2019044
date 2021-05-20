@@ -18,10 +18,16 @@ app.use(cookieParser());
 
 var hbs = exphbs.create({});
 
-app.get("/", function(req,res){
+app.get("/start", function(req,res){
   res.clearCookie('user');
   res.clearCookie('token');
   res.sendFile(__dirname + "/HTML/startPage.html");
+});
+
+app.get("/", (req, res) => {
+  res.clearCookie('user');
+  res.clearCookie('token');
+  res.sendFile(__dirname + "/HTML/index.html");
 });
 
 /* -------------- PATIENT ROUTES ---------------- */

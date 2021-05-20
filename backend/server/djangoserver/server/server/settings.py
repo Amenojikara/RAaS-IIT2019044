@@ -26,8 +26,6 @@ SECRET_KEY = 'j5pgsz6+h$%ozs_48n%=@v7p(g=39k$uxxq-4ob0h=a4o)kz-!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -119,8 +117,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-ALLOWED_HOSTS = ['37af8b30b7bc.ngrok.io',
-                 'localhost']
+ALLOWED_HOSTS = [ '*' ]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
