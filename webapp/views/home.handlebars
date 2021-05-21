@@ -2,7 +2,9 @@
 <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-storage.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-analytics.js"></script>
-
+<div class="dash_doc">
+  <h1>DOCTOR DASHBOARD</h1>
+</div>
     {{#each patient_details}}
           <div class="row w-100 d-flex justify-content-center mt-3 mt-md-5 mt-sm-3 align-items-start">
               <div class="col-md-8 col-sm-10 justify-content-center mb-4">
@@ -47,6 +49,7 @@
                 <a href=""  onclick="addNewPatient()" data-bs-toggle="modal" data-bs-target="#addTest"><img  src="../../Images/plus.png" alt="" class="" height="50px" width="50px"></a>
               </span>
 
+
           </div>
       </div>
 
@@ -56,7 +59,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <h5 class="modal-title" id="staticBackdropLabel">ADD PATIENT</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -64,10 +67,11 @@
             <label>Patient id : </label>
             <input type="text" name="Patient_name">
             <br>
+            <br>
             <label>Disease Id: </label>
             <input type="text" name="dis_id">
             <br>
-
+            <br>
             <label for="addDisease">Disease Type: </label>
             <select  id="addDisease" name="addDisease">
               <option value="Cancer">Cancer</option>
@@ -75,6 +79,8 @@
               <option value="Heart Disease">Heart Disease</option>
               <option value="Diabetes">Diabetes</option>
             </select>
+            <br>
+            <br>
             <ul id="detailDisease">
 
             </ul>
@@ -144,6 +150,7 @@ function addNewPatient(){
 
       for(var i=0;i<fields.length;i++){
         var list = document.createElement("LI");
+        var br =   document.createElement("BR");
         var lab = document.createElement("LABEL");
         var textnode = document.createTextNode(fields[i]+":  ");
         lab.appendChild(textnode);
@@ -155,6 +162,7 @@ function addNewPatient(){
         document.getElementById("detailDisease").appendChild(list);
         list.appendChild(node);
         document.getElementById("detailDisease").appendChild(list);
+        document.getElementById("detailDisease").appendChild(br);
   }
     }
     else if(selected_option =="Diabetes"){
@@ -164,6 +172,7 @@ function addNewPatient(){
       var i=1;
       for(i=0;i<fields.length;i++){
         var list = document.createElement("LI");
+        var br =   document.createElement("BR");
         var lab= document.createElement("LABEL");
         var textnode = document.createTextNode(fields[i]+":- ");
         lab.appendChild(textnode);
@@ -175,6 +184,7 @@ function addNewPatient(){
         document.getElementById("detailDisease").appendChild(list);
         list.appendChild(node);
         document.getElementById("detailDisease").appendChild(list);
+        document.getElementById("detailDisease").appendChild(br);
       }
     }
 
@@ -186,6 +196,7 @@ function addNewPatient(){
       var i=1;
       for(i=0;i<fields.length;i++){
         var list = document.createElement("LI");
+        var br =   document.createElement("BR");
         var lab= document.createElement("LABEL");
         var textnode = document.createTextNode(fields[i]+":- ");
         lab.appendChild(textnode);
@@ -197,10 +208,12 @@ function addNewPatient(){
         document.getElementById("detailDisease").appendChild(list);
         list.appendChild(node);
         document.getElementById("detailDisease").appendChild(list);
+        document.getElementById("detailDisease").appendChild(br);
       }
     }
     else if(selected_option =="Throat Tumor"){
       var list = document.createElement("LI");
+      var br =   document.createElement("BR");
       var lab= document.createElement("LABEL");
       var textnode = document.createTextNode("Upload the image:- ");
       lab.appendChild(textnode);
@@ -219,6 +232,7 @@ function addNewPatient(){
       document.getElementById("detailDisease").appendChild(list);
       list.appendChild(node1);
       document.getElementById("detailDisease").appendChild(list);
+      document.getElementById("detailDisease").appendChild(br);
 
     }
 

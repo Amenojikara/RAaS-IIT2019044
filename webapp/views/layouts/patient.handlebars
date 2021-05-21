@@ -7,7 +7,7 @@
     <title>Patient Dashboard</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/sidebar.css"> 
+    <link rel="stylesheet" href="../CSS/sidebar.css">
 
     <style>
         html, body {
@@ -39,8 +39,15 @@
         }
         #canvas-wrap { position:relative } /* Make this a positioned parent */
         #overlay     { position:absolute; top:20px; left:30px; width: 90rem }
-        .btn { 
+        .btn {
             border-radius: 50px;
+        }
+        .dash_pat{
+          text-align: center;
+          margin-top: 20px;
+        }
+        .dash_pat h1{
+          color: white;
         }
     </style>
 
@@ -48,15 +55,15 @@
 </head>
 
 <body>
-    <div id="canvas-wrap"> 
+    <div id="canvas-wrap">
         <canvas id="c"> </canvas>
-        <div id="overlay">   
-            {{{body}}}      
+        <div id="overlay">
+            {{{body}}}
         </div>
     </div>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/1.0.0/anime.min.js"></script>
-    
+
     <script>
         var c = document.getElementById("c");
         var ctx = c.getContext("2d");
@@ -65,7 +72,7 @@
         var bgColor = "#FF6138";
         var animations = [];
         var circles = [];
-        
+
         var colorPicker = (function() {
             var colors = ["#FF6138", "#FFBE53", "#2980B9", "#282741"];
             var index = 0;
@@ -99,7 +106,7 @@
         };
 
         function handleEvent(e) {
-            if (e.touches) { 
+            if (e.touches) {
                 e.preventDefault();
                 e = e.touches[0];
             }
@@ -108,7 +115,7 @@
             var targetR = calcPageFillRadius(e.pageX, e.pageY);
             var rippleSize = Math.min(200, (cW * .4));
             var minCoverDuration = 750;
-            
+
             var pageFill = new Circle({
                 x: e.pageX,
                 y: e.pageY,
@@ -125,7 +132,7 @@
                     removeAnimation(fillAnimation);
                 }
             });
-            
+
             var ripple = new Circle({
                 x: e.pageX,
                 y: e.pageY,
@@ -146,7 +153,7 @@
                 duration: 900,
                 complete: removeAnimation
             });
-            
+
             var particles = [];
             for (var i=0; i<32; i++) {
                 var particle = new Circle({
@@ -229,7 +236,7 @@
             if (window.CP) {
                 // CodePen's loop detection was causin' problems
                 // and I have no idea why, so...
-                window.CP.PenTimer.MAX_TIME_IN_LOOP_WO_EXIT = 6000; 
+                window.CP.PenTimer.MAX_TIME_IN_LOOP_WO_EXIT = 6000;
             }
             window.addEventListener("resize", resizeCanvas);
             addClickListeners();
@@ -243,13 +250,13 @@
             var inactive = setTimeout(function(){
                 fauxClick(cW/2, cH/2);
             }, 2000);
-        
+
             function clearInactiveTimeout() {
                 clearTimeout(inactive);
                 document.removeEventListener("mousedown", clearInactiveTimeout);
                 document.removeEventListener("touchstart", clearInactiveTimeout);
             }
-            
+
             document.addEventListener("mousedown", clearInactiveTimeout);
             document.addEventListener("touchstart", clearInactiveTimeout);
         }
