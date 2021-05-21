@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    
+
     <style>
       body
 {
@@ -275,7 +275,7 @@ background-color: #14edaa;}
 
 .logn-btn
 {
-  
+
      background: #1c1f2f;
     border-radius: 30px;
     overflow: hidden;
@@ -375,7 +375,7 @@ background-color: #14edaa;}
     border-style: solid;
     border-color: rgba(255,255,255, 0.2);
     margin-right: 10px;
-   
+
 }
 
 .fb-color
@@ -408,15 +408,25 @@ background-color: #14edaa;}
   }
 }
 
+.pat_head{
+  position: relative;
+  top: 0px;
+  left: 50px;
+}
+.pat_head1{
+  position: relative;
+  top: 90px;
+}
+
     </style>
 
   </head>
   <body>
     <header class="top-header">
     </header>
-    
+
     <div id="mainCoantiner">
-      
+
     <!--dust particel-->
     <div>
       <div class="starsec"></div>
@@ -425,25 +435,25 @@ background-color: #14edaa;}
       <div class="starfifth"></div>
     </div>
     <!--Dust particle end--->
-    
+
     <div class="container text-center text-dark mt-5">
       <div class="row">
-        <div class="col-lg-4 col-md-6">
-          <img id="lund" src="../Resources/—Pngtree—handsome doctor decorating illustration_4689422.png" alt="" class="w-100 h-100">
+        <div class="col-lg-4 col-md-6 pat_head">
+          <img id="lund" src="images/apat.png" alt="" style="height: 600px; width:500px;">
         </div>
-        <div class="col-lg-4 d-block mx-auto mt-5">
+        <div class="col-lg-4 d-block mx-auto mt-5 pat_head1">
           <div class="row">
             <div class="col-xl-12 col-md-12 col-md-12">
               <div class="card">
                 <div class="card-body wow-bg" id="formBg">
                   <form method="POST" action="/patient">
                     <h3 class="colorboard">Patient Login</h3>
-      
+
                     <p class="text-muted">Sign In to your account</p>
-      
+
                     <div class="input-group mb-3"> <input id="PatientId" type="text" class="form-control textbox-dg" placeholder="Patient Id" name="id"> </div>
                     <div class="input-group mb-4"> <input id="AccessToken" type="password" class="form-control textbox-dg" placeholder="Password" name="token"> </div>
-      
+
                     <div class="row">
                       <div class="col-12"> <button id="patient_log" type="submit" class="btn btn-primary logn-btn btn-block w-100">Login</button> </div>
                       <div class="col-12"> <a href="/patient/register"><button type="button" class="btn btn-primary logn-btn btn-block w-100">Sign Up</button></a> </div>
@@ -458,7 +468,7 @@ background-color: #14edaa;}
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
     </div>
@@ -466,7 +476,7 @@ background-color: #14edaa;}
 
 
     <script>
-      
+
 $('#nmberone').click(function() {
     $('#mainCoantiner, #formBg').removeClass('mystyleSec');
   $('#mainCoantiner, #formBg').removeClass('mystylethird');
