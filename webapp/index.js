@@ -161,7 +161,9 @@ app.get("/doctor/dashboard/:id", async(req,res) => {
     const rawResponse = await fetch(`${URLS.SERVER_URL}/doctor/dashboard/${req.params.id}/`, requestOption);
     const data = await rawResponse.json();
     console.log(data);
-    res.render('home', data);
+    res.render('home', data
+     // Doctor_id: req.cookies.user}
+  );
 })
 
 // FORMAT OF JSON FOR API TO BE CALLED IN BELOW ROUTE
