@@ -9,6 +9,7 @@ Shreesh Swaraj - IIT2019044
 ```
 
 ### Setting up Project
+#### [Link to User Manual](https://drive.google.com/file/d/16CqaGZz-ZM5-ldq8y0bMlJGfTQ2egC3k/view?usp=sharing)
 ```
 1. Running webapp server
 > cd webapp 
